@@ -20,10 +20,11 @@ function Users() {
                 setUsers(response.data);
 
             } catch (e) {
-
+                setError(e);
             }
         }
 
+        fetchUsers();
 
     },[]);
 
