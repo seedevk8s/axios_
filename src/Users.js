@@ -8,7 +8,18 @@ function Users() {
     
     useEffect(() => {
         const fetchUsers = async () => {
+            try {
+                setError(null);
+                setUsers(null);
+                setLoading(true);
 
+                const response = await axios.get(
+                    'https://jsonplaceholder.typicode.com/users'
+                );
+
+            } catch (e) {
+
+            }
         }
 
 
