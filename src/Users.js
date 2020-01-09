@@ -7,7 +7,11 @@ function Users() {
     const [error, setError] = useState(null);
     
     useEffect(() => {
-        
+        const fetchUsers = async () => {
+
+        }
+
+
     },[]);
 
 
