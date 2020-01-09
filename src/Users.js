@@ -22,6 +22,7 @@ function Users() {
             } catch (e) {
                 setError(e);
             }
+            setLoading(false);
         }
 
         fetchUsers();
