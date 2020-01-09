@@ -1,6 +1,5 @@
-import { useReducer, useEffect, useCallback } from 'react';
+import { useReducer, useEffect } from 'react';
 
-// loading, success, error 총 3가지 action.
 function reducer(state, action) {
     switch (action.type) {
         case 'LOADING':
@@ -26,54 +25,30 @@ function reducer(state, action) {
     }
 }
 
-export  default function useAsync(callback, deps = []) {
+function useAsync(callback, deps) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: null,
-        error: null
+        error: false
     });
 
-    const fetchData = useCallback(async () => {
-        dispatch({ type: 'LOADING '});
-
+    const fetchData = async () => {
+        dispatch({ type: 'LOADING' });
         try {
             const data = await callback();
-            dispatch( {type: 'SUCCESS', data });
-        }catch (e) {
-            dispatch( {type: 'ERROR', error: e});
+            dispatch({ type: 'SUCCESS', data });
+        } catch (e) {
+            dispatch({ type: 'ERROR', error: e });
         }
-    }, [callback]);
+    };
 
     useEffect(() => {
         fetchData();
-
+        // eslint 설정을 다음 줄에서만 비활성화
         // eslint-disable-next-line
     }, deps);
 
     return [state, fetchData];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default useAsync;
