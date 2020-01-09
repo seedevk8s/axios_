@@ -27,7 +27,11 @@ function reducer(state, action) {
 }
 
 function useAsync(callback, deps = []) {
-
+    const [state, dispatch] = useReducer(reducer, {
+        loading: false,
+        data: null,
+        error: null
+    });
 }
 
 
