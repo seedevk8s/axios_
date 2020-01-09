@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useCallback } from 'react';
 
 // loading, success, error 총 3가지 action.
 function reducer(state, action) {
@@ -33,7 +33,7 @@ function useAsync(callback, deps = []) {
         error: null
     });
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         dispatch({ type: 'LOADING '});
 
         try {
@@ -42,7 +42,7 @@ function useAsync(callback, deps = []) {
         }catch (e) {
             dispatch( {type: 'ERROR', error: e});
         }
-    }
+    }, [callback]);
 
     useEffect(() => {
         fetchData();
