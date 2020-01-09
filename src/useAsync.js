@@ -26,7 +26,7 @@ function reducer(state, action) {
     }
 }
 
-function useAsync(callback, deps = []) {
+export  default function useAsync(callback, deps = []) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: null,
@@ -52,8 +52,6 @@ function useAsync(callback, deps = []) {
 
     return [state, fetchData];
 }
-
-
 
 
 
